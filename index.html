@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DANXXEK | Portfolio</title>
+    <link href="../images/logo/logo.png" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="javascript" href="scripts/script.js">
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js" defer></script>
+</head>
+
+
+<body>
+<script src="https://unpkg.com/@studio-freight/lenis"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Inicializace Lenis
+        const lenis = new Lenis({
+            duration: 1.2,          // plynulý scroll při kliknutí
+            easing: t => t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t, // jemný ease-in-out
+            smooth: true,            // hlavní smooth scroll
+            smoothWheel: true,       // plynulý wheel scroll
+            wheelMultiplier: 0.45,    // malinko rychlejší scroll kolečkem
+            lerp: 0.2                // plynulé zrychlení/decelerace
+        });
+
+        function raf(time) {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
+        requestAnimationFrame(raf)
+
+        // Smooth scroll při kliknutí na navigaci
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (!target) return;
+
+                const top = target.offsetTop;
+
+                lenis.scrollTo(top, {
+                    duration: 1.2,                  // plynulý scroll při kliknutí
+                    easing: t => t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t // stejné easing
+                });
+            });
+        });
+    });
+</script>
+<header class="topbar">
+    <div class="profile">
+        <img src="../images/foto/me/dan.jpg" alt="Profilová fotka Daniel Štěrba">
+        <a href="#hero">Daniel Štěrba</a>
+    </div>
+
+    <nav class="icons">
+        <a href="#aboute">O mně</a>
+        <a href="#tech">Technologie</a>
+        <a href="#vytvory">Výtvory</a>
+        <a href="#projekty">Projekty</a>
+        <a href="#sluzby">Služby</a>
+    </nav>
+
+    <a href="#kontakt" class="kontaktujte">
+        <span>Kontaktujte mě</span>
+    </a>
+
+    <!-- HAMBURGER -->
+    <button class="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- MOBILE MENU -->
+    <nav class="mobile-menu">
+        <a href="#aboute">O mně</a>
+        <a href="#tech">Technologie</a>
+        <a href="#vytvory">Výtvory</a>
+        <a href="#projekty">Projekty</a>
+        <a href="#sluzby">Služby</a>
+        <a href="#kontakt" class="mobile-kontakt">Kontaktujte mě</a>
+    </nav>
+</header>
+
+<script>
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+    });
+
+    /* Zavření po kliknutí */
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        });
+    });
+
+    /* Shake efekt */
+    const btn = document.querySelector('.kontaktujte');
+    if (btn) {
+        setInterval(() => {
+            btn.classList.add('shake');
+            setTimeout(() => btn.classList.remove('shake'), 500);
+        }, 6000);
+    }
+</script>
+<script>
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.topbar')) {
+            document.querySelector('.hamburger')?.classList.remove('active');
+            document.querySelector('.mobile-menu')?.classList.remove('active');
+        }
+    });
+</script>
+<section id="hero" class="hero section">
+    <div class="hello"><img src="../images/pictures/wave.png" alt="Mávající ruka"> <p>Ahoj, já jsem</p></div>
+    <h1>DANXXEK</h1>
+    <p class="subtext">A zkouším úplně všechno!</p>
+    <div class="arrow"><a href="#aboute">↓</a></div>
+</section>
+<div class="heroe"></div>
+
+<section id="aboute" class="aboute">
+    <h2>O mně</h2>
+    <p>
+        Jsem student 2. ročníku <a href="https://kyberna.cz/" class="aboute-a" target="_blank">Střední školy aplikované kybernetiky v Hradci Králové</a> se zaměřením na <strong>programování</strong> a <strong>IT</strong>, kde se učím <strong>C#</strong> a <strong>HTML/CSS</strong>. Zatím vytvářím jen jednoduché konzolové aplikace a weby. Zároveň se věnuji počítačové grafice pro sociální sítě, což mi umožňuje spojovat technické dovednosti s kreativitou. Mým cílem je rozvíjet své programátorské schopnosti, učit se nové technologie a podílet se na projektech, které propojují IT a vizuální tvorbu. Rád také sportuji a věnuji se focení a natáčení, což mi pomáhá rozvíjet oko pro detail a estetiku.
+    </p>
+    <a href="about.html" class="btn">Chci vědět víc!</a>
+</section>
+
+<section id="tech" class="tech">
+    <h2>Technologie, které používám</h2>
+    <p>
+        Technologie, které používám/ovládám. Toto určitě není všechno, mrkni na víc!
+    </p>
+
+    <div class="slider" style="
+    --width: 100px;
+    --height: 100px;
+    --quantity: 19;
+">
+        <div class="list">
+            <div class="item" style="--position: 1"><img src="../images/icons/Photoshop.png" alt=""><span class="tooltip">Adobe Photoshop</span></div>
+            <div class="item" style="--position: 2"><img src="../images/icons/Lightroom.png" alt=""><span class="tooltip">Adobe Lightroom</span></div>
+            <div class="item" style="--position: 3"><img src="../images/icons/Illustrator.png" alt=""><span class="tooltip">Adobe Illustrator</span></div>
+            <div class="item" style="--position: 4"><img src="../images/icons/Premiere.png" alt=""><span class="tooltip">Adobe Premiere Pro</span></div>
+            <div class="item" style="--position: 5"><img src="../images/icons/Effects.png" alt=""><span class="tooltip">Adobe After Effects</span></div>
+            <div class="item" style="--position: 6"><img src="../images/icons/Figma.png" alt=""><span class="tooltip">Figma</span></div>
+            <div class="item" style="--position: 7"><img src="../images/icons/Canva.png" alt=""><span class="tooltip">Canva</span></div>
+            <div class="item" style="--position: 8"><img src="../images/icons/Word.png" alt=""><span class="tooltip">Microsoft Word</span></div>
+            <div class="item" style="--position: 9"><img src="../images/icons/Excel.png" alt=""><span class="tooltip">Microsoft Excel</span></div>
+            <div class="item" style="--position: 10"><img src="../images/icons/Powerpoint.png" alt=""><span class="tooltip">Microsoft PowerPoint</span></div>
+            <div class="item" style="--position: 11"><img src="../images/icons/Access.png" alt=""><span class="tooltip">Microsoft Access</span></div>
+            <div class="item" style="--position: 12"><img src="../images/icons/Rider.png" alt=""><span class="tooltip">JetBrains Rider</span></div>
+            <div class="item" style="--position: 13"><img src="../images/icons/Webstorm.png" alt=""><span class="tooltip">JetBrains WebStorm</span></div>
+            <div class="item" style="--position: 14"><img src="../images/icons/VS.png" alt=""><span class="tooltip">Visual Studio</span></div>
+            <div class="item" style="--position: 15"><img src="../images/icons/VScode.png" alt=""><span class="tooltip">Visual Studio Code</span></div>
+            <div class="item" style="--position: 16"><img src="../images/icons/Inventor.svg" alt=""><span class="tooltip">Autodesk Inventor</span></div>
+            <div class="item" style="--position: 17"><img src="../images/icons/3ds.png" alt=""><span class="tooltip">Autodesk 3ds Max</span></div>
+            <div class="item" style="--position: 18"><img src="../images/icons/GitLab.png" alt=""><span class="tooltip">GitLab</span></div>
+            <div class="item" style="--position: 19"><img src="../images/icons/Github.svg" alt=""><span class="tooltip">GitHub</span></div>
+        </div>
+    </div>
+    <a href="technologie.html" class="btn">Chci vědět víc!</a>
+</section>
+<section id="vytvory" class="vytvory">
+    <h2>Moje výtvory/práce</h2>
+
+    <p>Zde je pár vybraných náhledů mých výtvorů.</p>
+
+    <div class="containere grid-2x2">
+
+        <section class="sectiona">
+            <h3>Náhledovky</h3>
+            <div class="gallery">
+                <div class="media">
+                    <img src="../images/creations/thumbnails/7dniPasky.png" alt="">
+                </div>
+                <div class="media">
+                    <img src="../images/creations/thumbnails/CoupleTrenink.png" alt="">
+                </div>
+                <div class="media">
+                    <img src="../images/creations/thumbnails/TreninkZada2.png" alt="">
+                </div>
+                <div class="media">
+                    <img src="../images/creations/thumbnails/Uvodka1.png" alt="">
+                </div>
+            </div>
+        </section>
+
+        <section class="sectiona">
+            <h3>Grafika</h3>
+            <div class="gallery">
+                <div class="media">
+                    <img src="../images/creations/graphic/GRA3.png" alt="">
+                </div>
+                <div class="media">
+                    <img src="../images/no-file/5.png" alt="">
+                </div>
+                <div class="media">
+                    <img src="../images/no-file/5.png" alt="">
+                </div>
+                <div class="media">
+                    <img src="../images/no-file/5.png" alt="">
+                </div>
+            </div>
+        </section>
+
+        <section class="sectiona">
+            <h3>Fotky</h3>
+            <div class="gallery">
+                <div class="media">
+                    <img src="../images/creations/photos/Car1.jpg" alt="">
+                </div>
+                <div class="media">
+                    <img src="../images/creations/photos/Car2.jpg" alt="">
+                </div>
+                <div class="media">
+                    <img src="../images/creations/photos/Car3.jpg" alt="">
+                </div>
+                <div class="media">
+                    <img src="../images/creations/photos/Car4.jpg" alt="">
+                </div>
+            </div>
+        </section>
+
+        <section class="sectiona">
+            <h3>Videa</h3>
+            <div class="gallery">
+                <div class="media">
+                    <img src="../images/no-file/5.png" alt="">
+                </div>
+                <div class="media">
+                    <img src="../images/no-file/5.png" alt="">
+                </div>
+                <div class="media">
+                    <img src="../images/no-file/5.png" alt="">
+                </div>
+                <div class="media">
+                    <img src="../images/no-file/5.png" alt="">
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+
+    <a href="creations.html" class="btn">Chci vidět víc!</a>
+
+</section>
+<section id="projekty" class="projekty">
+    <h2>Projekty</h2>
+
+    <p>Zde je ukázka vybraných projektů.</p>
+
+    <div class="project-grid">
+        <div class="project-card">
+            <img src="images/projects/MainWeb.png" alt="Osobní web">
+            <h3>Portfolio web</h3>
+            <div class="tech-icons">
+                <img src="../images/icons/HTML2.png" alt="HTML">
+                <img src="../images/icons/CSS2.png" alt="CSS">
+                <img src="../images/icons/JS2.png" alt="JavaScript">
+                <img src="../images/icons/WebStorm2.png" alt="Webstorm">
+                <img src="../images/icons/Photoshop2.png" alt="Photoshop">
+                <img src="../images/icons/Figma2.png" alt="Figma">
+            </div>
+            <p>Moje portfolio, které si momentálně procházíte.</p>
+
+        </div>
+
+        <div class="project-card">
+            <img src="images/projects/PathPlanner2.png" alt="PathPlanner">
+            <h3>PathPlanner</h3>
+            <div class="tech-icons">
+                <img src="../images/icons/Csharp2.png" alt="Csharp">
+                <img src="../images/icons/Rider2.png" alt="Rider">
+                <img src="../images/icons/Postman.png" alt="Postman">
+            </div>
+            <p>Konzolová aplikace pro pomoc s cestováním.</p>
+
+        </div>
+
+        <div class="project-card">
+            <img src="images/no-file/5.png" alt="To-Do aplikace">
+            <h3>---</h3>
+            <div class="tech-icons">
+            </div>
+            <p>Zatím tu ještě nic není, ale brzy už bude!</p>
+
+        </div>
+    </div>
+
+    <a href="projects.html" class="btn">Chci vidět víc!</a>
+</section>
+<section id="sluzby" class="sluzby">
+    <h2>Služby</h2>
+
+    <p>Zde jsou služby které momentálně poskytuji. Zatím hlavně preferuji grafiku.</p>
+
+    <div class="container">
+        <div class="grid">
+
+            <div class="card">
+                <h3>Grafika</h3>
+                <ul class="list">
+                    <li><span class="icon"><iconify-icon icon="fe:picture" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>Náhledovky</li>
+                    <li><span class="icon"><iconify-icon icon="jam:instant-picture-f" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>Plakáty</li>
+                    <li><span class="icon"><iconify-icon icon="fluent-mdl2:picture" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>Banery</li>
+                    <li><span class="icon"><iconify-icon icon="material-symbols:post-outline-rounded" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>Post design</li>
+                    <li><span class="icon"><iconify-icon icon="streamline:clubs-symbol-remix" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>Logo design</li>
+                    <li><span class="icon"><iconify-icon icon="icon-park-outline:engineering-brand" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>Firemní branding</li>
+                    <li><span class="icon"><iconify-icon icon="solar:card-bold" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>Firemní kartičky</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Návrh webů</h3>
+                <ul class="list">
+                    <li><span class="icon"><iconify-icon icon="icon-park-outline:web-page" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>Landing pages</li>
+                    <li><span class="icon"><iconify-icon icon="dashicons:portfolio" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>Portfolio</li>
+                    <li><span class="icon"><iconify-icon icon="gg:website" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>Firemní weby</li>
+                    <li><span class="icon"><iconify-icon icon="fluent:design-ideas-20-filled" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>UI/UX Design</li>
+                    <li><span class="icon"><iconify-icon icon="material-symbols:photo-size-select-small" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>Responsivní design</li>
+                </ul>
+            </div>
+
+
+            <div class="card">
+                <h3>Tvorba webů</h3>
+                <ul class="list">
+                    <li><span class="icon"><iconify-icon icon="icon-park-outline:graphic-stitching-four" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>Front-end & back-end</li>
+                    <li><span class="icon"><iconify-icon icon="tabler:tool" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>Integrace nástrojů</li>
+                    <li><span class="icon"><iconify-icon icon="mdi:restart" width="20" height="20"  style="color: #d5d5d5"></iconify-icon></span>Údržba & aktualizace webu</li>
+
+                </ul>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+</section>
+<section id="kontakt" class="kontakt">
+
+    <h2>Kontakt</h2>
+
+    <p> Můžete mě kontaktovat přes formulář nebo sledovat mé sociální sítě.</p>
+
+    <div class="main-wrapper">
+        <div class="form-container">
+            <form id="contact-form">
+                <!-- Honeypot proti spamu -->
+                <input type="text" name="_gotcha" style="display:none">
+
+                <div class="row">
+                    <div class="input-group">
+                        <label>Jméno *</label>
+                        <input type="text" name="firstName" placeholder="First name" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Příjmení *</label>
+                        <input type="text" name="lastName" placeholder="Last name" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label>Email *</label>
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Vaše požadavky</label>
+                    <input type="hidden" name="services" id="services">
+                    <div class="tags">
+                        <button type="button" class="tag">Návrh webu</button>
+                        <button type="button" class="tag">Tvorbu webu</button>
+                        <button type="button" class="tag active">Grafika</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Jak můžu pomoci?</label>
+                    <textarea
+                            name="message"
+                            placeholder="Neváhejte a napište mi své představy nebo potřeby..."
+                            required
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Odeslat</button>
+
+                <!-- Success / error zprávy -->
+                <p id="form-success" style="display:none; color:#4ade80; margin-top:10px; font-size:12px;">
+                    Zpráva byla úspěšně odeslána ✔
+                </p>
+                <p id="form-error" style="display:none; color:#f87171; margin-top:10px;">
+                    Něco se pokazilo. Zkuste to prosím znovu.
+                </p>
+            </form>
+        </div>
+
+        <script>
+            /* ---------- TAGY ---------- */
+            const tags = document.querySelectorAll('.tag');
+            const servicesInput = document.getElementById('services');
+
+            tags.forEach(tag => {
+                tag.addEventListener('click', () => {
+                    tag.classList.toggle('active');
+
+                    const activeTags = Array.from(tags)
+                        .filter(t => t.classList.contains('active'))
+                        .map(t => t.textContent.trim());
+
+                    servicesInput.value = activeTags.join(', ');
+                });
+            });
+
+            /* ---------- ODESLÁNÍ FORMULÁŘE ---------- */
+            const form = document.getElementById('contact-form');
+            const successMsg = document.getElementById('form-success');
+            const errorMsg = document.getElementById('form-error');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                successMsg.style.display = 'none';
+                errorMsg.style.display = 'none';
+
+                const formData = new FormData(form);
+
+                try {
+                    const response = await fetch("https://formspree.io/f/mykkznnv", {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            "Accept": "application/json"
+                        }
+                    });
+
+                    if (response.ok) {
+                        form.reset();
+                        servicesInput.value = "";
+                        successMsg.style.display = 'block';
+                    } else {
+                        errorMsg.style.display = 'block';
+                    }
+                } catch (error) {
+                    errorMsg.style.display = 'block';
+                }
+            });
+        </script>
+
+        <div class="links-container">
+
+            <a href="https://www.linkedin.com/in/daniel-%C5%A1t%C4%9Brba-946894383/m" target="_blank" class="link-card linkedin">
+                <iconify-icon icon="mdi:linkedin" width="19" height="19"  style="color: #d5d5d5"></iconify-icon>
+                <i class="fa-brands fa-linkedin-in"></i>
+                <span>LinkedIn <span class="username">(Daniel Štěrba)</span></span>
+            </a>
+
+            <a href="https://www.instagram.com/danxxek/" target="_blank" class="link-card instagram">
+                <iconify-icon icon="mdi:instagram" width="19" height="19"  style="color: #d5d5d5"></iconify-icon>
+                <i class="fa-brands fa-instagram"></i>
+                <span>Instagram <span class="username">(@danxxek)</span></span>
+            </a>
+
+            <a href="https://www.instagram.com/sterbiccc/" target="_blank" class="link-card instagram">
+                <iconify-icon icon="mdi:instagram" width="19" height="19"  style="color: #d5d5d5"></iconify-icon>
+                <i class="fa-brands fa-instagram"></i>
+                <span>Instagram - Osobní <span class="username">(@sterbiccc)</span></span>
+            </a>
+
+            <a href="https://discord.com/users/801731201899036672" target="_blank" class="link-card discord">
+                <iconify-icon icon="ic:baseline-discord" width="19" height="19"  style="color: #d5d5d5"></iconify-icon>
+                <i class="fa-brands fa-discord"></i>
+                <span>Discord <span class="username">(d4nxxek)</span></span>
+            </a>
+
+        </div>
+    </div>
+
+    <script>
+        // Vybereme všechna tlačítka s třídou "tag"
+        const tags = document.querySelectorAll('.tag');
+
+        tags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                // toggle zajistí: pokud třídu má, smaže ji. Pokud ji nemá, přidá ji.
+                tag.classList.toggle('active');
+            });
+        });
+    </script>
+
+</section>
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column logo-section">
+            <img src="../images/logo/logo_bile.png" alt="Logo" class="footer-logo">
+        </div>
+
+        <div class="footer-column">
+            <h3>Navigace</h3>
+            <ul>
+                <li><a href="#hero">Domů</a></li>
+                <li><a href="#aboute">Omně</a></li>
+                <li><a href="#vytvory">Výtvory</a></li>
+                <li><a href="#projekty">Projekty</a></li>
+                <li><a href="#sluzby">Služby</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>Portfolio</h3>
+            <ul>
+                <li><a href="#vytvory">Náhledovky</a></li>
+                <li><a href="#vytvory">Grafika</a></li>
+                <li><a href="#vytvory">Fotky</a></li>
+                <li><a href="#vytvory">Videa</a></li>
+                <li><a href="#projekty">Projekty</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>Kontakt</h3>
+            <p><iconify-icon icon="mdi:internet" width="14" height="14"  style="color: #d5d5d5"></iconify-icon> Webová doména - zatím není</p>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/danxxek/" target="_blank"><iconify-icon icon="mdi:instagram" width="30" height="30"  style="color: #d5d5d5"></iconify-icon></a>
+                <a href="https://www.linkedin.com/in/daniel-%C5%A1t%C4%9Brba-946894383/" target="_blank"><iconify-icon icon="mdi:linkedin" width="30" height="30"  style="color: #d5d5d5"></iconify-icon></a>
+                <a href="https://discord.com/users/801731201899036672" target="_blank"><iconify-icon icon="ic:baseline-discord" width="30" height="30"  style="color: #d5d5d5"></iconify-icon></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>pololetní projekt - &copy; 2026 DANXXEK - Daniel Štěrba | Všechna práva vyhrazena.</p>
+    </div>
+</footer>
+</body>
+</html>

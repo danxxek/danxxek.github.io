@@ -1,0 +1,223 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(
+            circle at top center,
+            rgba(44, 160, 255, 0.35) 0%,
+            transparent 50%
+    );
+    background-color: #000;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    min-height: 100vh;
+}
+
+/* ============================
+   TOPBAR – PŘEVZATO ZE MAIN
+   ============================ */
+
+.topbar {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1200px, 95%);
+    height: 45px;
+    padding: 0 10px;
+    background: rgba(9, 9, 9, 0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile img {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+}
+
+.profile a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.icons {
+    display: flex;
+    gap: 28px;
+    font-size: 14px;
+}
+
+.icons a {
+    color: #c5c5c5;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.icons a:hover {
+    color: #fff;
+}
+
+/* Kontakt button */
+.kontaktujte {
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: linear-gradient(-45deg, #000, #1b1b1b);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.kontaktujte::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(-45deg, #00256c, #5783f3);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.kontaktujte span {
+    position: relative;
+    z-index: 1;
+}
+
+.kontaktujte:hover::before {
+    opacity: 1;
+}
+
+/* ============================
+   O MNĚ – HLAVNÍ SEKCE
+   ============================ */
+
+.aboute {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 160px 40px 100px;
+    text-align: center;
+    background: linear-gradient(180deg, #0d0d0d, #000);
+    border-radius: 22px;
+    box-shadow:
+            0 40px 90px rgba(0,0,0,0.7),
+            inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+/* Nadpis */
+.aboute h2 {
+    display: inline-block;
+    padding: 6px 28px;
+    margin-bottom: 30px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 25px;
+    background: linear-gradient(to bottom, #1a1a1a, #000);
+    color: #dcdcdc;
+}
+
+/* Text */
+.aboute p {
+    font-size: 19px;
+    line-height: 34px;
+    color: #cfcfcf;
+    max-width: 780px;
+    margin: 0 auto 18px;
+}
+
+/* Zvýrazněné jméno */
+.aboute-a {
+    color: #02aeec;
+    font-weight: 500;
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+
+@media (max-width: 900px) {
+    .aboute {
+        padding: 140px 26px 80px;
+    }
+
+    .icons {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .aboute {
+        padding: 120px 20px 70px;
+        border-radius: 18px;
+    }
+
+    .aboute p {
+        font-size: 17px;
+        line-height: 30px;
+    }
+}
+
+@media (max-width: 360px) {
+    .aboute {
+        padding: 110px 16px 60px;
+    }
+
+    .aboute h2 {
+        font-size: 14px;
+    }
+
+    .aboute p {
+        font-size: 16px;
+    }
+}
+
+.topbar {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1200px, 95%);
+    height: 45px;
+    padding: 0 16px;
+    background: rgba(9,9,9,0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Tlačítko zpět */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 18px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(-45deg, #000, #1a1a1a);
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: all 0.3s ease;
+}
+
+/* Hover efekt */
+.back-btn:hover {
+    background: linear-gradient(-45deg, #00256c, #5783f3);
+    transform: translateX(-4px);
+}

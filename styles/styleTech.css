@@ -1,0 +1,224 @@
+/* ============================
+   ZÁKLAD
+   ============================ */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background:
+            radial-gradient(circle at top center, rgba(44,160,255,0.35) 0%, transparent 50%),
+            #000;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+}
+
+/* ============================
+   TOPBAR (STEJNÁ JAKO JINDE)
+   ============================ */
+
+.topbar {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1200px, 95%);
+    height: 45px;
+    padding: 0 12px;
+    background: rgba(9,9,9,0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.profile a {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.icons {
+    display: flex;
+    gap: 28px;
+}
+
+.icons a {
+    font-size: 14px;
+    color: #c5c5c5;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.icons a:hover {
+    color: #fff;
+}
+
+/* ============================
+   TECHNOLOGIE SEKCE
+   ============================ */
+
+.tech {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 160px 40px 100px;
+    text-align: center;
+}
+
+/* Nadpis */
+.tech h2 {
+    display: inline-block;
+    padding: 6px 28px;
+    margin-bottom: 50px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 25px;
+    background: linear-gradient(to bottom, #1a1a1a, #000);
+    color: #dcdcdc;
+}
+
+/* ============================
+   GRID & KARTY
+   ============================ */
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.grid {
+    width: 100%;
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+/* Karta */
+.card {
+    background: linear-gradient(180deg, #0d0d0d, #000);
+    border-radius: 22px;
+    padding: 34px 30px;
+    box-shadow:
+            0 35px 80px rgba(0,0,0,0.7),
+            inset 0 0 0 1px rgba(255,255,255,0.06);
+    text-align: left;
+}
+
+/* Název kategorie */
+.card h3 {
+    font-size: 20px;
+    margin-bottom: 24px;
+}
+
+/* Seznam */
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.list li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 15px;
+    color: #cfcfcf;
+}
+
+/* Ikona (fake badge) */
+.icon {
+    min-width: 44px;
+    text-align: center;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 20px;
+    background: linear-gradient(-45deg, #00256c, #5783f3);
+    color: #fff;
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+
+@media (max-width: 900px) {
+    .icons {
+        display: none;
+    }
+
+    .tech {
+        padding: 140px 26px 80px;
+    }
+}
+
+@media (max-width: 600px) {
+    .tech {
+        padding: 120px 20px 70px;
+    }
+
+    .card {
+        padding: 28px 24px;
+    }
+
+    .card h3 {
+        font-size: 18px;
+    }
+}
+.topbar {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1200px, 95%);
+    height: 45px;
+    padding: 0 16px;
+    background: rgba(9,9,9,0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Tlačítko zpět */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 18px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(-45deg, #000, #1a1a1a);
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: all 0.3s ease;
+}
+
+/* Hover efekt */
+.back-btn:hover {
+    background: linear-gradient(-45deg, #00256c, #5783f3);
+    transform: translateX(-4px);
+}
