@@ -73,7 +73,192 @@ a {
 
 
 /* --------------BODY -------------*/
+#modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.81);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.4s ease;
+    cursor: url("../images/cursors/DefaultWarning.png"), auto;
+}
 
+#modal {
+    position: relative;
+    background-color: #fdfdfd;
+    border-radius: 45px;
+    padding: 50px 35px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    animation: popIn 0.45s ease;
+    overflow: hidden;
+}
+
+/* HLAVNÍ PÁSKY */
+
+
+
+/* Horní / dolní zarovnání */
+.tape-top {
+    top: 0;
+}
+
+.tape-bottom {
+    bottom: 0;
+}
+
+/* Jemný pohyb textury */
+.tape {
+    background-size: 40px 40px;
+    animation: tapeShift 20s linear infinite;
+}
+
+@keyframes tapeShift {
+    from { background-position: 0 0; }
+    to { background-position: 200px 0; }
+}
+
+/* Obsah */
+#modal h2 {
+    margin: 0 0 15px;
+    font-size: 1.55rem;
+    color: #0e0e0e;
+}
+
+#modal p {
+    color: #0e0e0e;
+    line-height: 1.6;
+}
+
+/* Tlačítka – klidná */
+.confirm {
+    margin-top: 28px;
+    padding: 10px 26px;
+    border: none;
+    border-radius: 999px;
+    font-size: 15px;
+    background: #cfcfcf;
+    color: #000000;
+    opacity: 0.9;
+    cursor: url("../images/cursors/SelectWarning.png"), pointer;
+    transition: 0.3s;
+}
+
+.confirm:hover {
+    opacity: 1;
+}
+
+/* Zavírání */
+.close {
+    position: absolute;
+    top: 36px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: url("../images/cursors/Select.png"), pointer;
+    color: rgba(30, 30, 30, 0);
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.close:hover {
+    opacity: 1;
+}
+
+/* Animace */
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* === ZAVÍRACÍ ANIMACE === */
+
+#modal.closing {
+    animation: modalClose 0.45s ease forwards;
+}
+
+#modal-overlay.closing {
+    animation: overlayClose 0.45s ease forwards;
+}
+
+@keyframes modalClose {
+    to {
+        opacity: 0;
+        transform: translateY(25px) scale(0.94);
+    }
+}
+
+@keyframes overlayClose {
+    to {
+        opacity: 0;
+        backdrop-filter: blur(0);
+    }
+}
+
+.construction {
+    width: 120px;
+    margin: 15px auto 25px;
+    position: relative;
+}
+
+/* zem */
+.construction .ground {
+    height: 2px;
+    width: 100%;
+    background: rgba(34, 34, 34, 0.56);
+    border-radius: 3px;
+    margin-bottom: 8px;
+}
+
+/* sloupky */
+.construction .bars {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 40px;
+}
+
+.construction .bars span {
+    width: 18px;
+    background: repeating-linear-gradient(
+            45deg,
+            #f5c400,
+            #f5c400 6px,
+            #111 6px,
+            #111 12px
+    );
+    border-radius: 3px;
+    animation: buildUp 1.6s ease-in-out infinite;
+}
+
+/* postupná animace */
+.construction .bars span:nth-child(1) { animation-delay: 0s; }
+.construction .bars span:nth-child(2) { animation-delay: 0.2s; }
+.construction .bars span:nth-child(3) { animation-delay: 0.4s; }
+.construction .bars span:nth-child(4) { animation-delay: 0.6s; }
+
+@keyframes buildUp {
+    0%   { height: 8px; }
+    50%  { height: 36px; }
+    100% { height: 8px; }
+}
 
 /* TOP BAR */
 .topbar {

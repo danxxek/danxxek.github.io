@@ -17,6 +17,50 @@
 
 
 <body>
+<div id="modal-overlay" onclick="closeModal(event)">
+    <div id="modal">
+        <div class="tape tape-top"></div>
+        <div class="tape tape-bottom"></div>
+
+        <button class="close" onclick="closeModal()">×</button>
+
+        <h2>Web je ve výstavbě</h2>
+
+        <div class="construction">
+            <div class="ground"></div>
+            <div class="bars">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <p>
+            Stránka je momentálně v přípravě.<br>
+            Pokud narazíte na chybu nebo něco nefunguje,
+            budu rád za zpětnou vazbu.
+        </p>
+
+        <button class="confirm" onclick="closeModal()">Rozumím</button>
+    </div>
+</div>
+<script>
+    function closeModal(event) {
+        if (event && event.target.id !== "modal-overlay") return;
+
+        const overlay = document.getElementById("modal-overlay");
+        const modal = document.getElementById("modal");
+
+        modal.classList.add("closing");
+        overlay.classList.add("closing");
+
+        setTimeout(() => {
+            overlay.style.display = "none";
+        }, 500); // musí sedět s CSS animací
+    }
+</script>
+
 <script src="https://unpkg.com/@studio-freight/lenis"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
