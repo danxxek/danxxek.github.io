@@ -1,68 +1,109 @@
-/* ============================
-   ZÁKLAD
-   ============================ */
+html{
+    scroll-behavior: auto;
+    cursor: url("../images/cursors/Default.png"), auto;
+}
 
-html, body {
+* {
     margin: 0;
     padding: 0;
-    min-height: 100vh;
-    background:
-            radial-gradient(circle at top center, rgba(44,160,255,0.35) 0%, transparent 50%),
-            #000;
-    color: #fff;
+    box-sizing: border-box;
     font-family: "Inter", sans-serif;
 }
 
+.section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+body {
+    color: #ffff;
+    background: radial-gradient(circle at top center, rgba(44, 160, 255, 0.37) 0%, transparent 50%);
+    background-color: #000;
+    background-repeat: no-repeat;
+    background-size: 100% 50vh; /* <-- ZMENŠÍ GRADIENT */
+    height: 100%;
+
+}
+
+
+
+@font-face {
+    font-family: "Anton SC";
+    src: url("/fonts/AntonSC-Regular.ttf");
+}
+
+a {
+    cursor: url("../images/cursors/Select.png"), pointer;
+    text-decoration: none;
+}
+
 /* ============================
-   TOPBAR
+   TOPBAR – PŘEVZATO ZE MAIN
    ============================ */
 
+/* TOP BAR */
+/* TOP BAR */
 .topbar {
-    position: fixed;
-    top: 12px;
+    position: fixed;        /* zůstává nahoře vždy */
+    top: 12px;              /* odsazení od vrchu */
     left: 50%;
     transform: translateX(-50%);
     width: min(1200px, 95%);
     height: 45px;
-    padding: 0 12px;
-    background: rgba(9,9,9,0.15);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.2);
+    padding: 0 5px;
+    background: rgba(9, 9, 9, 0.11);
+    backdrop-filter: blur(12px) saturate(100%);
+    border: 1px solid rgba(255, 255, 255, 0.21);
     border-radius: 25px;
+    z-index: 1000;          /* vysoký index, aby bylo nad obsahem */
+
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    z-index: 1000;
+    justify-content: space-between; /* profil vlevo, kontakt vpravo */
+    position: fixed;       /* sticky/fixed */
+
+
 }
 
+/* ===== PROFILE ===== */
 .profile {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-shrink: 0;
+    min-width: 0;
 }
 
 .profile img {
-    width: 32px;
-    height: 32px;
+    width: 33px;
+    height: 33px;
     border-radius: 50%;
 }
 
 .profile a {
     color: #fff;
+    font-weight: bold;
     font-size: 16px;
-    font-weight: 600;
-    text-decoration: none;
+    white-space: nowrap;
 }
 
+/* ===== DESKTOP NAV ===== */
 .icons {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    gap: 28px;
+    gap: 30px;
+    font-size: 14px;
 }
 
 .icons a {
-    font-size: 14px;
     color: #c5c5c5;
-    text-decoration: none;
+    white-space: nowrap;
     transition: color 0.3s;
 }
 
@@ -70,154 +111,277 @@ html, body {
     color: #fff;
 }
 
-/* ============================
-   VÝTVORY SEKCE
-   ============================ */
+/* ===== KONTAKT ===== */
+.kontaktujte {
+    margin-left: 18px;
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 0.5px solid rgba(69, 69, 69, 0.62);
+    color: #e6e6e6; /* text zůstane bílý */
+    font-size: 15px;
+    background: linear-gradient(-45deg, #000, #1b1b1b); /* default černý */
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.4s ease;
+    flex-shrink: 0;
+}
 
-.vytvory {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 160px 40px 100px;
+
+.kontaktujte span {
+    position: relative;
+    z-index: 1;
+}
+
+.kontaktujte::before {
+    content: "";
+    color: #e6e6e6; /* text zůstane bílý */
+    position: absolute;
+    inset: 0; /* top:0; left:0; right:0; bottom:0 */
+    background: linear-gradient(-45deg, #00256c, #5783f3); /* modrý gradient */
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: inherit;
+    z-index: 0; /* pod textem */
+}
+
+.kontaktujte:hover::before {
+    opacity: 1;
+}
+
+/* hover efekt stínu */
+.kontaktujte:hover {
+    box-shadow: 0 0 25px rgba(23, 80, 106, 0.4);
+}
+
+/* ===== HAMBURGER ===== */
+.hamburger {
+    display: none;
+    margin-left: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 28px;
+    height: 22px;
+    position: relative;
+}
+
+.hamburger span {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    left: 0;
+    transition: 0.3s;
+}
+
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 10px; }
+.hamburger span:nth-child(3) { bottom: 0; }
+
+/* ACTIVE HAMBURGER */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 10px;
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg);
+    bottom: 10px;
+}
+
+/* ===== MOBILE MENU ===== */
+.mobile-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 100%;
+    max-width: 380px;
+
+    /* TRUE GLASS */
+    background: rgba(9, 9, 9, 0.91);
+
+    border-radius: 24px;
+    padding: 22px;
+
+    box-shadow:
+            0 14px 40px rgba(0, 0, 0, 0.45),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px) scale(0.95);
+    transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+}
+
+.mobile-menu a {
+    color: #fff;
+    font-size: 16px;
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+
+.mobile-kontakt {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 16px;
+    background: linear-gradient(-45deg, #00256c, #5783f3);
     text-align: center;
 }
 
-/* Nadpis */
-.vytvory h2 {
-    display: inline-block;
-    padding: 6px 28px;
-    margin-bottom: 60px;
-    font-size: 16px;
-    font-weight: 400;
-    border-radius: 25px;
-    background: linear-gradient(to bottom, #1a1a1a, #000);
-    color: #dcdcdc;
-}
-
-/* ============================
-   GRID 2x2
-   ============================ */
-
-.grid-2x2 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-    gap: 40px;
-}
-
-/* Sekce (Grafika / Weby) */
-.sectiona {
-    background: linear-gradient(180deg, #0d0d0d, #000);
-    border-radius: 24px;
-    padding: 30px;
-    box-shadow:
-            0 40px 90px rgba(0,0,0,0.7),
-            inset 0 0 0 1px rgba(255,255,255,0.06);
-    text-align: left;
-}
-
-.sectiona h3 {
-    font-size: 20px;
-    margin-bottom: 22px;
-}
-
-/* ============================
-   GALERIE
-   ============================ */
-
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-}
-
-.media {
-    position: relative;
-    overflow: hidden;
-    border-radius: 18px;
-    background: #000;
-}
-
-.media img {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    transition: transform 0.45s ease;
-}
-
-/* Hover efekt */
-.media:hover img {
-    transform: scale(1.06);
-}
-
-/* ============================
-   RESPONSIVE
-   ============================ */
-
-@media (max-width: 1000px) {
-    .grid-2x2 {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 900px) {
-    .icons {
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .icons,
+    .kontaktujte {
         display: none;
     }
 
-    .vytvory {
-        padding: 140px 26px 80px;
+    .hamburger {
+        display: block;
     }
 }
 
-@media (max-width: 600px) {
-    .vytvory {
-        padding: 120px 20px 70px;
-    }
-
-    .sectiona {
-        padding: 24px;
-    }
-
-    .gallery {
-        grid-template-columns: 1fr;
-    }
+html, body {
+    overflow-x: hidden;
 }
 
 .topbar {
-    position: fixed;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(1200px, 95%);
-    height: 45px;
-    padding: 0 16px;
-    background: rgba(9,9,9,0.15);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    z-index: 1000;
+    max-width: 95vw;
 }
 
-/* Tlačítko zpět */
-.back-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 7px 18px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #fff;
-    text-decoration: none;
-    background: linear-gradient(-45deg, #000, #1a1a1a);
-    border: 1px solid rgba(255,255,255,0.25);
-    transition: all 0.3s ease;
+/* Zabrání rozbití jména */
+.profile a {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Hover efekt */
-.back-btn:hover {
-    background: linear-gradient(-45deg, #00256c, #5783f3);
-    transform: translateX(-4px);
+/* ===== TABLET ===== */
+@media (max-width: 900px) {
+    .icons {
+        gap: 18px;
+        font-size: 13px;
+    }
 }
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+
+    .icons,
+    .kontaktujte {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 360px) {
+    .mobile-menu {
+        max-width: 100%;
+        right: 0;
+    }
+}
+
+/* ===== SMALL MOBILE ===== */
+@media (max-width: 480px) {
+    .profile a {
+        max-width: 120px;
+        font-size: 15px;
+    }
+
+    .topbar {
+        padding: 6px 12px;
+        gap: 12px;
+    }
+
+    .mobile-menu {
+        padding: 16px;
+    }
+
+    .mobile-menu a {
+        font-size: 15px;
+    }
+}
+
+/* ===== EXTRA SMALL (360px) ===== */
+@media (max-width: 360px) {
+    .profile img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .profile a {
+        max-width: 95px;
+        font-size: 14px;
+    }
+
+    .hamburger {
+        width: 24px;
+        height: 18px;
+    }
+
+    .hamburger span {
+        height: 2px;
+    }
+
+    .mobile-menu {
+        padding: 14px;
+        gap: 14px;
+    }
+}
+
+/* ===== 320px ===== */
+@media (max-width: 320px) {
+    .topbar {
+        padding: 6px 10px;
+    }
+
+    .profile a {
+        max-width: 80px;
+    }
+
+    .mobile-menu a {
+        font-size: 14px;
+    }
+
+    .mobile-kontakt {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+/* ===== HAMBURGER ACTIVE FROM 896px DOWN ===== */
+@media (max-width: 896px) {
+
+    .icons,
+    .kontaktujte {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 360px) {
+    .mobile-menu {
+        max-width: 100%;
+        right: 0;
+    }
+}
+/* HERO SECTION */

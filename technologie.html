@@ -2,44 +2,92 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DANXXEK | Technologie</title>
-
-    <link rel="stylesheet" href="../styles/styleTech.css">
     <link href="../images/logo/logo.png" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styleTech.css">
+    <link rel="javascript" href="scripts/script.js">
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js" defer></script>
 </head>
 <body>
-
+<!-- TOPBAR (stejná jako hlavní stránka) -->
 <header class="topbar">
-    <a href="index.html" class="back-btn">
-        ← Zpět
+    <div class="profile">
+        <img src="../images/foto/me/dan.jpg" alt="Profilová fotka Daniel Štěrba">
+        <a href="index.html#hero">Daniel Štěrba</a>
+    </div>
+
+    <nav class="icons">
+        <a href="index.html#aboute">O mně</a>
+        <a href="index.html#tech">Technologie</a>
+        <a href="index.html#vytvory">Výtvory</a>
+        <a href="index.html#projekty">Projekty</a>
+        <a href="index.html#sluzby">Služby</a>
+    </nav>
+
+    <a href="index.html#kontakt" class="kontaktujte">
+        <span>Kontaktujte mě</span>
     </a>
+
+    <!-- HAMBURGER -->
+    <button class="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- MOBILE MENU -->
+    <nav class="mobile-menu">
+        <a href="index.html#aboute">O mně</a>
+        <a href="index.html#tech">Technologie</a>
+        <a href="index.html#vytvory">Výtvory</a>
+        <a href="index.html#projekty">Projekty</a>
+        <a href="index.html#sluzby">Služby</a>
+        <a href="index.html#kontakt" class="mobile-kontakt">Kontaktujte mě</a>
+    </nav>
 </header>
 
-<section class="tech">
-    <h2>Technologie</h2>
+<script>
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
 
-    <div class="container">
-        <div class="grid">
-            <div class="card">
-                <h3>Frontend</h3>
-                <ul class="list">
-                    <li><span class="icon">HTML</span> HTML5</li>
-                    <li><span class="icon">CSS</span> CSS / Responsive</li>
-                    <li><span class="icon">JS</span> JavaScript</li>
-                </ul>
-            </div>
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+    });
 
-            <div class="card">
-                <h3>Backend & jiné</h3>
-                <ul class="list">
-                    <li><span class="icon">C#</span> C# (.NET)</li>
-                    <li><span class="icon">API</span> Práce s API</li>
-                    <li><span class="icon">UI</span> UI / UX</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+    /* Zavření po kliknutí */
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        });
+    });
+
+    /* Shake efekt */
+    const btn = document.querySelector('.kontaktujte');
+    if (btn) {
+        setInterval(() => {
+            btn.classList.add('shake');
+            setTimeout(() => btn.classList.remove('shake'), 500);
+        }, 6000);
+    }
+</script>
+<script>
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.topbar')) {
+            document.querySelector('.hamburger')?.classList.remove('active');
+            document.querySelector('.mobile-menu')?.classList.remove('active');
+        }
+    });
+</script>
+
+
 
 </body>
 </html>
