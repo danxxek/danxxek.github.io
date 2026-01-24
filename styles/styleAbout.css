@@ -400,13 +400,21 @@ html, body {
     --text: #e5e7eb;
     --muted: #bcbcbc;
     --accent: #f8f8f8;
+    --topbar-offset: 80px;
+    --topbar-height: 70px;
 }
 
 
 .container {
     max-width: 1200px;
     margin: auto;
-    padding: 100px 20px 40px;
+    padding: calc(var(--topbar-offset) + 20px) 20px 40px;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --topbar-offset: 100px;
+    }
 }
 
 
@@ -580,7 +588,7 @@ a:hover {
     color: white;
     font-size: 24px;
     padding: 10px 14px;
-    cursor: pointer;
+    cursor: url("../images/cursors/Select.png"), pointer;
     border-radius: 25%;
     z-index: 10;
 }
@@ -622,6 +630,18 @@ a:hover {
 .back-btn:hover {
     background: rgba(26, 34, 40, 1);
     transform: translateX(-3px);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-top: 130px; /* víc místa pod topbar */
+    }
+}
+
+@media (max-width: 768px) {
+    .back-btn {
+        top: -35px; /* zůstane nad nadpisem, ale pod topbarem */
+    }
 }
 
 .oceneni {
@@ -796,3 +816,81 @@ a:hover {
     font-size: 0.8rem;
     color: #939393;
 }
+
+@media (max-width: 1150px) {
+    .back-btn {
+        top: -35px; /* zůstane nad nadpisem, ale pod topbarem */
+    }
+}
+
+@media (max-width: 1150px) {
+    .container {
+        padding-top: 130px; /* víc místa pod topbar */
+    }
+}
+
+
+
+@media (max-width: 900px) {
+
+
+    /* FOOTER */
+    .footer-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+
+
+    .footer {
+        padding: 40px 20px 20px;
+    }
+}
+
+/* ==================================================
+   MOBILE POLISH – SPACING & MEDIA (320–480px)
+   ================================================== */
+@media (max-width: 480px) {
+
+    /* ---------- OKRAJE STRÁNKY ---------- */
+
+    body {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+
+    /* ---------- FOOTER ---------- */
+
+    .footer {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 360px;
+        border-radius: 16px 16px 0 0;
+    }
+}
+/* ==================================================
+   ULTRA MOBILE (≤ 360 / 320 px)
+   ================================================== */
+@media (max-width: 360px) {
+
+    /* ---- ZÁKLADNÍ OKRAJE ---- */
+    body {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    /* ---- FOOTER ---- */
+    .footer {
+        padding: 32px 16px 20px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        gap: 24px;
+    }
+}
+
+
