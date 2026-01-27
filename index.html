@@ -183,7 +183,7 @@
     <a href="about.html" class="btn">Chci vědět víc!</a>
 </section>
 
-<section id="tech" class="tech">
+<section id="tech" class="tech ">
     <h2>Technologie, které používám</h2>
     <p>
         Technologie, které používám/ovládám. Toto určitě není všechno, mrkni na víc!
@@ -218,7 +218,7 @@
     </div>
     <a href="technologie.html" class="btn">Chci vědět víc!</a>
 </section>
-<section id="vytvory" class="vytvory">
+<section id="vytvory" class="vytvory ">
     <h2>Moje výtvory/práce</h2>
 
     <p>Zde je pár vybraných náhledů mých výtvorů.</p>
@@ -229,16 +229,24 @@
             <h3>Náhledovky</h3>
             <div class="gallery">
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/creations/thumbnails/7dniPasky.png" alt="">
+                    </div>
                 </div>
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/creations/thumbnails/CoupleTrenink.png" alt="">
+                    </div>
                 </div>
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/creations/thumbnails/TreninkZada2.png" alt="">
+                    </div>
                 </div>
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/creations/thumbnails/Uvodka1.png" alt="">
+                    </div>
                 </div>
             </div>
         </section>
@@ -247,16 +255,24 @@
             <h3>Grafika</h3>
             <div class="gallery">
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/creations/graphic/GRA3.png" alt="">
+                    </div>
                 </div>
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/no-file/5.png" alt="">
+                    </div>
                 </div>
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/no-file/5.png" alt="">
+                    </div>
                 </div>
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/no-file/5.png" alt="">
+                    </div>
                 </div>
             </div>
         </section>
@@ -265,16 +281,24 @@
             <h3>Fotky</h3>
             <div class="gallery">
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/creations/photos/Car1.jpg" alt="">
+                    </div>
                 </div>
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/creations/photos/Car2.jpg" alt="">
+                    </div>
                 </div>
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/creations/photos/Car3.jpg" alt="">
+                    </div>
                 </div>
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/creations/photos/Car4.jpg" alt="">
+                    </div>
                 </div>
             </div>
         </section>
@@ -283,28 +307,83 @@
             <h3>Videa</h3>
             <div class="gallery">
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/no-file/5.png" alt="">
+                    </div>
                 </div>
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/no-file/5.png" alt="">
+                    </div>
                 </div>
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/no-file/5.png" alt="">
+                    </div>
                 </div>
                 <div class="media">
+                    <div class="media-inner">
                     <img src="../images/no-file/5.png" alt="">
+                    </div>
                 </div>
             </div>
         </section>
 
     </div>
 
-
-
     <a href="creations.html" class="btn">Chci vidět víc!</a>
 
 </section>
-<section id="projekty" class="projekty">
+
+<script>
+    let active = null;
+
+    document.querySelectorAll(".media").forEach(media => {
+        media.addEventListener("click", () => {
+            if (active) return;
+
+            const rect = media.getBoundingClientRect();
+
+            const clone = media.cloneNode(true);
+            const img = clone.querySelector("img");
+
+            clone.classList.add("is-animating");
+
+            clone.style.top = rect.top + "px";
+            clone.style.left = rect.left + "px";
+            clone.style.width = rect.width + "px";
+            clone.style.height = rect.height + "px";
+
+            document.body.appendChild(clone);
+            document.body.style.overflow = "hidden";
+
+            requestAnimationFrame(() => {
+                const vw = window.innerWidth * 0.75;
+                const vh = window.innerHeight * 0.75;
+
+                const scale = Math.min(vw / rect.width, vh / rect.height);
+
+                const x = window.innerWidth / 2 - (rect.left + rect.width / 2);
+                const y = window.innerHeight / 2 - (rect.top + rect.height / 2);
+
+                clone.style.transition = "transform 0.45s cubic-bezier(.4,0,.2,1)";
+                clone.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+            });
+
+            clone.addEventListener("click", () => {
+                clone.style.transform = "";
+                clone.addEventListener("transitionend", () => {
+                    clone.remove();
+                    document.body.style.overflow = "";
+                    active = null;
+                }, { once: true });
+            });
+
+            active = clone;
+        });
+    });
+</script>
+<section id="projekty" class="projekty ">
     <h2>Projekty</h2>
 
     <p>Zde je ukázka vybraných projektů.</p>
@@ -349,7 +428,7 @@
 
     <a href="projects.html" class="btn">Chci vidět víc!</a>
 </section>
-<section id="sluzby" class="sluzby">
+<section id="sluzby" class="sluzby ">
     <h2>Služby</h2>
 
     <p>Zde jsou služby které momentálně poskytuji. Zatím hlavně preferuji grafiku.</p>
@@ -400,7 +479,7 @@
     </div>
 
 </section>
-<section id="kontakt" class="kontakt">
+<section id="kontakt" class="kontakt ">
 
     <h2>Kontakt</h2>
 
