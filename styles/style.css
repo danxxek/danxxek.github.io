@@ -971,14 +971,40 @@ h1 {
 .tech-icons {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin: 4px 0 6px;
+    flex-wrap: wrap;          /* 🔥 KLÍČOVÉ */
+    gap: 8px;
+    margin: 6px 0 8px;
 }
 
 .tech-icons img {
-    width: 20px;
-    height: auto;
-    border-radius: 0%;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;          /* 🔥 DŮLEŽITÉ */
+}
+
+@media (max-width: 600px) and (min-width: 480px) {
+
+    .tech-icons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        gap: 0;
+        margin: 4px 0;
+        font-size: 0;           /* 🔥 zruší inline mezery */
+        align-content: flex-start;
+    }
+
+    .tech-icons img {
+        width: 22px;
+        height: 22px !important; /* 🔥 PŘEBIJE height:auto */
+        max-width: none;         /* 🔥 PŘEBIJE max-width:100% */
+        display: block;
+        object-fit: contain;
+        margin: 0;
+        padding: 0;
+    }
 }
 
 .project-card p {
@@ -995,6 +1021,17 @@ h1 {
 
 .project-card button {
     display: none;              /* DETAIL PRYČ */
+}
+
+@media (max-width: 600px) {
+    .tech-icons {
+        gap: 6px;
+    }
+
+    .tech-icons img {
+        width: 22px;
+        height: 22px;
+    }
 }
 
 .container {
@@ -1659,7 +1696,6 @@ img, video {
     video {
         width: 100%;
         height: auto;
-        max-height: none;
         object-fit: contain; /* VIDITELNÝ CELÝ OBSAH */
     }
 
@@ -1723,6 +1759,15 @@ img, video {
         margin-right: auto;
         max-width: 360px;
         border-radius: 16px 16px 0 0;
+    }
+
+    .tech-icons img {
+        width: 20px !important;
+        max-width: 20px;
+        height: auto;
+        padding: 0 !important;
+        background: transparent !important;
+        object-fit: contain;
     }
 }
 /* ==================================================
@@ -1849,6 +1894,14 @@ img, video {
         flex-direction: column;
         gap: 24px;
     }
+
+    .tech-icons img {
+        background: transparent !important;
+        padding: 0 !important;
+        width: 20px;
+        height: auto;
+        object-fit: contain;
+    }
 }
 
 /* ==================================================
@@ -1902,4 +1955,6 @@ img, video {
         padding: 10px 12px;
     }
 }
+
+
 
