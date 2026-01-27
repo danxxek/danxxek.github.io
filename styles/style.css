@@ -1956,5 +1956,41 @@ img, video {
     }
 }
 
+/* --- BEZPEČNÁ SCROLL ANIMACE --- */
+
+/* Třída, kterou JavaScript přidá elementům, které chce animovat */
+.js-scroll-hidden {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform, opacity; /* Optimalizace pro plynulý pohyb */
+}
+
+/* Stav po zobrazení */
+.js-scroll-show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Vypnutí animací pro uživatele, kteří to mají v systému zakázané */
+@media (prefers-reduced-motion) {
+    .js-scroll-hidden {
+        transition: none;
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.gallery {
+    overflow: auto; /* Povolí scrollování */
+    scrollbar-width: none; /* Pro Firefox - skryje lištu */
+}
+
+/* Pro Chrome, Safari a Edge - skryje lištu */
+.gallery::-webkit-scrollbar {
+    display: none;
+}
+
 
 

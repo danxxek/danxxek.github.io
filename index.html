@@ -192,7 +192,7 @@
     <div class="slider" style="
     --width: 100px;
     --height: 100px;
-    --quantity: 19;
+    --quantity: 18;
 ">
         <div class="list">
             <div class="item" style="--position: 1"><img src="../images/icons/Photoshop.png" alt=""><span class="tooltip">Adobe Photoshop</span></div>
@@ -207,12 +207,12 @@
             <div class="item" style="--position: 10"><img src="../images/icons/Powerpoint.png" alt=""><span class="tooltip">Microsoft PowerPoint</span></div>
             <div class="item" style="--position: 11"><img src="../images/icons/Access.png" alt=""><span class="tooltip">Microsoft Access</span></div>
             <div class="item" style="--position: 12"><img src="../images/icons/Rider.png" alt=""><span class="tooltip">JetBrains Rider</span></div>
-            <div class="item" style="--position: 14"><img src="../images/icons/VS.png" alt=""><span class="tooltip">Visual Studio</span></div>
-            <div class="item" style="--position: 15"><img src="../images/icons/VScode.png" alt=""><span class="tooltip">Visual Studio Code</span></div>
-            <div class="item" style="--position: 16"><img src="../images/icons/Inventor.svg" alt=""><span class="tooltip">Autodesk Inventor</span></div>
-            <div class="item" style="--position: 17"><img src="../images/icons/3ds.png" alt=""><span class="tooltip">Autodesk 3ds Max</span></div>
-            <div class="item" style="--position: 18"><img src="../images/icons/GitLab.png" alt=""><span class="tooltip">GitLab</span></div>
-            <div class="item" style="--position: 19"><img src="../images/icons/Github.svg" alt=""><span class="tooltip">GitHub</span></div>
+            <div class="item" style="--position: 13"><img src="../images/icons/VS.png" alt=""><span class="tooltip">Visual Studio</span></div>
+            <div class="item" style="--position: 14"><img src="../images/icons/VScode.png" alt=""><span class="tooltip">Visual Studio Code</span></div>
+            <div class="item" style="--position: 15"><img src="../images/icons/Inventor.svg" alt=""><span class="tooltip">Autodesk Inventor</span></div>
+            <div class="item" style="--position: 16"><img src="../images/icons/3ds.png" alt=""><span class="tooltip">Autodesk 3ds Max</span></div>
+            <div class="item" style="--position: 17"><img src="../images/icons/GitLab.png" alt=""><span class="tooltip">GitLab</span></div>
+            <div class="item" style="--position: 18"><img src="../images/icons/Github.svg" alt=""><span class="tooltip">GitHub</span></div>
         </div>
     </div>
     <a href="technologie.html" class="btn">Chci vědět víc!</a>
@@ -677,5 +677,32 @@
         <p>&copy; 2026 DANXXEK - Daniel Štěrba | Všechna práva vyhrazena.</p>
     </div>
 </footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Vybereme pouze hlavní kontejnery uvnitř sekcí
+        // Přidali jsme '.aboute, .tech, .vytvory...' atd.
+        const sectionsToAnimate = document.querySelectorAll(
+            '.aboute, .tech, .vytvory, .projekty, .sluzby, .kontakt, .hero'
+        );
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('js-scroll-show');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1, // Spustí se, když vykoukne 10 % sekce
+            rootMargin: "0px 0px -100px 0px" // Spustí se o 100px dříve
+        });
+
+        sectionsToAnimate.forEach((el) => {
+            el.classList.add('js-scroll-hidden');
+            observer.observe(el);
+        });
+    });
+</script>
 </body>
 </html>
